@@ -1,15 +1,12 @@
-import React from "react";
 import {
-  useFonts,
   Nunito_400Regular,
   Nunito_700Bold,
+  useFonts,
 } from "@expo-google-fonts/nunito";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "./screens/Home";
-import ReviewDetails from "./screens/ReviewDetails";
-
-const Stack = createNativeStackNavigator();
+import React from "react";
+import "react-native-gesture-handler";
+import DrawerNavigator from "./routes/DrawerNavigator";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -23,10 +20,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Review Details" component={ReviewDetails} />
-      </Stack.Navigator>
+      <DrawerNavigator />
     </NavigationContainer>
   );
 }
