@@ -7,13 +7,14 @@ const Drawer = createDrawerNavigator();
 
 export default function DrawerNavigator() {
   return (
-    <Drawer.Navigator>
+    <Drawer.Navigator screenOptions={{ headerShown: false }}>
       <Drawer.Screen
         name="HomeStack"
         component={HomeStack}
         options={{
           title: "Home",
           headerTitle: "GameZone",
+          headerTitleAlign: "center",
         }}
       />
       <Drawer.Screen
@@ -22,6 +23,7 @@ export default function DrawerNavigator() {
         options={{
           title: "About",
           headerTitle: "About GameZone",
+          headerTitleAlign: "center",
         }}
       />
     </Drawer.Navigator>
