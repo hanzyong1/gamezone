@@ -1,7 +1,14 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { StatusBar, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  ImageBackground,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Header({ title }) {
@@ -10,7 +17,10 @@ export default function Header({ title }) {
   return (
     <SafeAreaView>
       <StatusBar />
-      <View style={styles.header}>
+      <ImageBackground
+        source={require("../assets/game_bg.png")}
+        style={styles.header}
+      >
         <MaterialIcons
           name="menu"
           size={28}
@@ -19,8 +29,14 @@ export default function Header({ title }) {
           }}
           style={styles.icon}
         />
-        <Text style={styles.headerText}>{title}</Text>
-      </View>
+        <View style={styles.headerTitle}>
+          <Image
+            source={require("../assets/heart_logo.png")}
+            style={styles.headerImage}
+          />
+          <Text style={styles.headerText}>{title}</Text>
+        </View>
+      </ImageBackground>
     </SafeAreaView>
   );
 }
@@ -32,7 +48,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: 60,
-    backgroundColor: "#ccc",
+    elevation: 5,
   },
   headerText: {
     fontWeight: "bold",
@@ -43,6 +59,13 @@ const styles = StyleSheet.create({
   icon: {
     position: "absolute",
     left: 16,
-    color: "#444",
+  },
+  headerTitle: {
+    flexDirection: "row",
+  },
+  headerImage: {
+    width: 26,
+    height: 26,
+    marginHorizontal: 10,
   },
 });
