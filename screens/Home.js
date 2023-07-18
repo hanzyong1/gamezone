@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import {
   FlatList,
+  Keyboard,
   Modal,
   StyleSheet,
   Text,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 import Card from "../shared/Card";
 import { globalStyles } from "../styles/global";
 import { MaterialIcons } from "@expo/vector-icons";
+import ReviewForm from "./ReviewForm";
 
 export default function Home({ navigation }) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -34,20 +37,28 @@ export default function Home({ navigation }) {
     },
   ]);
 
+  const addReview = (review) => {
+    review.key = Math.random().toString();
+    setReviews([review, ...reviews]);
+    setModalOpen(false);
+  };
+
   return (
     <View style={globalStyles.container}>
       <Modal visible={modalOpen} animationType="slide">
-        <View style={styles.modalContent}>
-          <MaterialIcons
-            name="close"
-            size={24}
-            style={[styles.modalToggle, styles.modalClose]}
-            onPress={() => {
-              setModalOpen(false);
-            }}
-          />
-          <Text>hi</Text>
-        </View>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.modalContent}>
+            <MaterialIcons
+              name="close"
+              size={24}
+              style={[styles.modalToggle, styles.modalClose]}
+              onPress={() => {
+                setModalOpen(false);
+              }}
+            />
+            <ReviewForm addReview={addReview} />
+          </View>
+        </TouchableWithoutFeedback>
       </Modal>
 
       <MaterialIcons
@@ -87,7 +98,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     alignSelf: "center",
-    backgroundColor: "red",
   },
   modalClose: {
     marginTop: 20,
