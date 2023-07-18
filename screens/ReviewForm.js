@@ -1,8 +1,9 @@
-import { ErrorMessage, Field, Formik } from "formik";
+import { Formik } from "formik";
 import React from "react";
-import { Button, Text, TextInput, View } from "react-native";
-import { globalStyles } from "../styles/global";
+import { Text, TextInput, View } from "react-native";
 import * as yup from "yup";
+import FlatButton from "../shared/Button";
+import { globalStyles } from "../styles/global";
 
 export default function ReviewForm({ addReview }) {
   const reviewSchema = yup.object({
@@ -53,6 +54,7 @@ export default function ReviewForm({ addReview }) {
                 {touched.title && errors.title}
               </Text>
               <TextInput
+                multiline
                 style={globalStyles.input}
                 placeholder="Review details"
                 onChangeText={handleChange("body")}
@@ -75,7 +77,7 @@ export default function ReviewForm({ addReview }) {
                 {touched.rating && errors.rating}
               </Text>
 
-              <Button color={"maroon"} title="Submit" onPress={handleSubmit} />
+              <FlatButton text="submit" onPress={handleSubmit} />
             </View>
           );
         }}
